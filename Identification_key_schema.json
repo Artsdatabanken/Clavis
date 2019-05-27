@@ -1,0 +1,672 @@
+{
+"$schema": "http://json-schema.org/draft-07/schema#",
+"title": "Identification key",
+"description": "An identification key, containing knowledge that may be used to distinguish taxa from each other.",
+"type": "object",
+"required": ["name", "language", "license", "creator", "taxa", "characters", "statements"],
+"properties":
+{
+  "name":
+  {
+    "description": "The name of the key",
+    "comment": "Accepts array for multilingual support.",
+    "$ref": "#/definitions/localizedString",
+    "examples": ["Birds of Norway"]
+  },
+  "media":
+  {
+    "description": "The logo/illustration image of the key.",
+    "comment": "Accepts array for multilingual support.",
+    "$ref": "#/definitions/localizedMediaElement"
+  },
+  "descriptionIntro":
+  {
+    "description": "Short description of the key (valid html).",
+    "comment": "Accepts array for multilingual support.",
+    "$ref": "#/definitions/localizedString"
+  },
+  "descriptionDetails":
+  {
+    "description": "Extended description of the key that supplements the descriptionIntro (valid html).",
+    "comment": "Accepts array for multilingual support.",
+    "$ref": "#/definitions/localizedString"
+  },
+  "descriptionUrl":
+  {
+    "description": "Hyperlink to more information on the key (valid url).",
+    "comment": "Accepts array for multilingual support.",
+    "$ref": "#/definitions/localizedUrl"
+  },
+  "source":
+  {
+    "description": "Source of the key.",
+    "comment": "Accepts array for multilingual support.",
+    "$ref": "#/definitions/localizedString",
+    "examples": ["Koch, Wouter (2019). Birds of Norway. ISBN 1234567890"]
+  },
+  "sourceUrl":
+  {
+    "description": "Hyperlink to the source of the key (valid url).",
+    "comment": "Accepts array for multilingual support.",
+    "$ref": "#/definitions/localizedUrl",
+    "examples": ["https://doi.org/10.1126/science.1251554"]
+  },
+  "region":
+  {
+    "description": "The region for which the key is valid (e.g. covers all subtaxa).",
+    "comment": "Accepts array for multilingual support.",
+    "$ref": "#/definitions/localizedString",
+    "examples": ["Norway", "Europe", "Trøndelag", ["Norge", "Norway"]]
+  },
+  "creator":
+  {
+    "description": "The name(s) of the creator(s) of the key",
+    "type": "string",
+    "examples": ["Wouter Koch", "Wouter Koch & Charles Darwin", "Wouter Koch et al."]
+  },
+  "creatorUrl":
+  {
+    "description": "Hyperlink to more information on the creator of the key (valid url).",
+    "comment": "Accepts array for multilingual support.",
+    "$ref": "#/definitions/localizedUrl"
+  },
+  "publisher":
+  {
+    "description": "The publising institution of the key.",
+    "comment": "Accepts array for multilingual support.",
+    "$ref": "#/definitions/localizedString",
+    "examples": ["Natural History Museum", ["Natural History Museum", "Naturhistorisk museum"]]
+  },
+  "publisherUrl":
+  {
+    "description": "Hyperlink to more information on the publisher of the key (valid url).",
+    "comment": "Accepts array for multilingual support.",
+    "$ref": "#/definitions/localizedUrl"
+  },
+  "license":
+  {
+    "description": "The url to the license under which the key falls.",
+    "$ref": "#/definitions/url",
+    "examples": ["https://creativecommons.org/licenses/by/4.0/"]
+  },
+  "language":
+  {
+    "description": "The ISO 639-1 code(s) of the key language(s).",
+    "comment": "String for a single language, array of strings for multilingual support. If used as an array, be sure to use the localizedString and localizedUrl as arrays too.",
+    "oneOf":
+    [
+      {
+        "type": "string",
+        "pattern": "^[a-z]{2}(-[a-z]{2})?$"
+      },
+      {
+        "type": "array",
+        "items": {"type": "string", "pattern": "^[a-z]{2}(-[a-z]{2})?$"}
+      }
+    ],
+    "examples": ["en", "no-nb",["en", "no-nb"]]
+  },
+  "lastModified":
+  {
+    "description": "The most recent moment the key was modified, as 'YYYY-MM-DD hh:mm:ss'.",
+    "type": "string",
+    "pattern": "^20\\d\\d-(0[1-9]|1[0-2])-([012]\\d|3[01]) ([01]\\d|2[0-3]):([0-5]\\d):([0-5]\\d)$",
+    "examples": ["2019-05-21 22:51:55"]
+  },
+  "externalServices":
+  {
+    "description": "Services used by the key for lookups of images, taxa, etc.",
+    "type": "array",
+    "items": {"$ref": "#/definitions/externalService"}
+  },
+  "levelsOfExpertise":
+  {
+    "description": "Levels of expertise the various characters require, so that the user can be warned, helped, etc.",
+    "type": "array",
+    "items": {"$ref": "#/definitions/levelOfExpertise"}
+  },
+  "taxa":
+  {
+    "description": "Taxa (e.g. species) the key can resolve to. Do not have to be exclusively taxonomic units.",
+    "comment": "Taxa to which the key can resolve. Either the taxa directly or their children. SubTaxonimic taxa (such as morphs, genders, life stages) should be presented through their parent only.",
+    "type": "array",
+    "items": {"$ref": "#/definitions/taxon"}
+  },
+  "characters":
+  {
+    "description": "Characters (questions, e.g. 'Wing color' or 'Number of spots') used to distinguish between two or more taxa.",
+    "type": "array",
+    "items": {"$ref": "#/definitions/character"}
+  },
+  "statements":
+  {
+    "description": "Relationships between taxa and character states (or lack thereof) that define those taxa.",
+    "type": "array",
+    "items": {"$ref": "#/definitions/statement"}
+  }
+},
+"definitions":
+{
+  "localizedString":
+  {
+    "description": "Language-dependent string or array of strings, corresponding to the languages supported by the key.",
+    "oneOf": [
+      {"type": "string"},
+      {"type": "array", "items": {"type": "string"}}
+    ]
+  },
+  "localizedUrl":
+  {
+    "description": "Language-dependent urls or array of urls, corresponding to the languages supported by the key.",
+    "oneOf": [
+      {"$ref": "#/definitions/url"},
+      {"type": "array", "items": {"$ref": "#/definitions/url"}}
+    ]
+  },
+  "localizedMediaElement":
+  {
+    "description": "Language-dependent media element or array of media elements, corresponding to the languages supported by the key.",
+    "oneOf": [
+      {"$ref": "#/definitions/mediaElement"},
+      {"type": "array", "items": {"$ref": "#/definitions/mediaElement"}}
+    ]
+  },
+  "url":
+  {
+    "description": "String formed as a url, or an external resource.",
+    "oneOf":
+    [
+      {"type": "string", "format": "uri"},
+      {"$ref": "#/definitions/externalResource"}
+    ]
+  },
+  "validId":
+  {
+    "description": "String used as an internal ID. Lowercase alphanumerical and underscores are allowed.",
+    "type": "string",
+    "pattern": "/^[a-z0-9_]+$/"
+  },
+  "image":
+  {
+    "type": "object",
+    "properties":
+    {
+      "type":
+      {
+        "description": "The type of the image.",
+        "type": "string",
+        "enum": ["url", "blob", "externalResource", "svg"]
+      },
+      "file":
+      {
+        "description": "The actual image (blob or svg) or reference to the image (url or resource).",
+        "oneOf":
+        [
+          {"type": "string"},
+          {"$ref": "#/definitions/url"}
+        ]
+      },
+      "width":
+      {
+        "description": "The number of pixels horizontally (if a bitmap).",
+        "type": "integer"
+      },
+      "height":
+      {
+        "description": "The number of pixels vertically (if a bitmap).",
+        "type": "integer"
+      },
+      "creator":
+      {
+        "description": "The name(s) of the creator(s) of the image",
+        "type": "string",
+        "examples": ["Wouter Koch", "Wouter Koch & Charles Darwin", "Wouter Koch et al."]
+      },
+      "publisher":
+      {
+        "description": "The publising institution of the image.",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString",
+        "examples": ["Natural History Museum", ["Natural History Museum", "Naturhistorisk museum"]]
+      },
+      "license":
+      {
+        "description": "The url to the license under which the image falls.",
+        "$ref": "#/definitions/url",
+        "examples": ["https://creativecommons.org/licenses/by/4.0/"]
+      }
+    }
+  },
+  "mediaElement":
+  {
+    "description": "A media element (various sizes if of the bitmap type).",
+    "type": "object",
+    "properties":
+    {
+      "type":
+      {
+        "Description": "Whether the image is a vector or a bitmap type image.",
+        "type": "string",
+        "enum": ["vector", "bitmap"]
+      },
+      "thumbnail":
+      {
+        "Description": "Smallest (>100px) version of the image. Only if bitmap type.",
+        "$ref": "#/definitions/image"
+      },
+      "small":
+      {
+        "Description": "Small (>400px) version of the image. Only if bitmap type.",
+        "$ref": "#/definitions/image"
+      },
+      "medium":
+      {
+        "Description": "Medium  (>700px) version of the image. Only if bitmap type.",
+        "$ref": "#/definitions/image"
+      },
+      "large":
+      {
+        "Description": "Large (>1000px) version of the image. Only if bitmap type.",
+        "$ref": "#/definitions/image"
+      },
+      "full":
+      {
+        "Description": "Full resolution version of the image. Only if bitmap type.",
+        "$ref": "#/definitions/image"
+      },
+      "vector":
+      {
+        "Description": "Vector version of image",
+        "$ref": "#/definitions/image"
+      }
+    }
+  },
+  "externalResource":
+  {
+    "description": "A resource managed elsewhere.",
+    "type": "object",
+    "properties":
+    {
+      "serviceId":
+      {
+        "description": "The id to one of the externalServices defined.",
+        "$ref": "#/definitions/validId"
+      },
+      "externalId":
+      {
+        "description": "The id of the resource at the externalService.",
+        "type": "string"
+      }
+    }
+  },
+  "externalService":
+  {
+    "description": "Service used by the key, for images, taxonomy and/or nomenclature, etc.",
+    "type": "object",
+    "required": ["id"],
+    "properties":
+    {
+      "id":
+      {
+        "description": "Internally unique id to the service.",
+        "$ref": "#/definitions/validId"
+      },
+      "name":
+      {
+        "description": "Name of the service.",
+        "type": "string"
+      },
+      "provider":
+      {
+        "description": "Provider of the service.",
+        "type": "string"
+      },
+      "url":
+      {
+        "description": "Url for the service documentation.",
+        "$ref": "#/definitions/url"
+      }
+    }
+  },
+  "levelOfExpertise":
+  {
+    "type": "object",
+    "required": ["id"],
+    "properties":
+    {
+      "id":
+      {
+        "$ref": "#/definitions/validId"
+      },
+      "name":
+      {
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString"
+      },
+      "warning":
+      {
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString"
+      },
+      "descriptionIntro":
+      {
+        "description": "Short description of the level of expertise required (valid html).",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString"
+      },
+      "descriptionDetails":
+      {
+        "description": "Extended description of the level of expertise required that supplements the descriptionIntro (valid html).",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString"
+      },
+      "descriptionUrl":
+      {
+        "description": "Hyperlink to more information on the level of expertise required (valid url).",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedUrl"
+      },
+      "media":
+      {
+        "description": "Media or illustration that informs the user on the level of expertise.",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedMediaElement"
+      }
+    }
+  },
+  "taxon":
+  {
+    "type": "object",
+    "oneOf":
+    [
+      {"required": ["id", "scientificName"]},
+      {"required": ["id", "externalReference"]}
+    ],
+    "properties":
+    {
+      "id":
+      {
+        "description": "Internally unique id to the taxon.",
+        "$ref": "#/definitions/validId"
+      },
+      "scientificName":
+      {
+        "description": "Scientific name of the taxon.",
+        "type": "string",
+        "examples": ["Vulpes lagopus"]
+      },
+      "scientificNameAuthor":
+      {
+        "description": "Author string of the scientific name of the taxon.",
+        "type": "string",
+        "examples": ["Koch, 1888"]
+      },
+      "placeholderName":
+      {
+        "description": "Name that can be shown while fetching the name externally. Also useful for editing the key.",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString",
+        "examples": ["B. hortorum, queen, melanistic"]
+      },
+      "vernacularName":
+      {
+        "description": "Vernacular name of the taxon.",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString",
+        "examples": ["fjellrev", ["fjellrev", "Arctic Fox"]]
+      },
+      "media":
+      {
+        "description": "Image of the taxon.",
+        "$ref": "#/definitions/mediaElement"
+      },
+      "taxonLevel":
+      {
+        "description": "Name of the level of the taxon.",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString",
+        "examples": ["slekt", ["slekt", "genus"]]
+      },
+      "isSubTaxonimic":
+      {
+        "description": "Whether or not this is a sub-class of a true taxon (such as a morph, life stage, sex, etc), or an actual taxon.",
+        "comment": "Default is FALSE (if not specified).",
+        "type": "boolean"
+      },
+      "isEndPoint":
+      {
+        "description": "Given that isSubTaxonimic is true for this taxon, should the key continue until this is the only remaining possibility, or stop at its parent?",
+        "comment": "Default is TRUE (if not specified).",
+        "type": "boolean"
+      },
+      "children":
+      {
+        "type": "array",
+        "items": {"$ref": "#/definitions/taxon"}
+      },
+      "externalReference":
+      {
+        "description": "Reference to a taxon at a provider, as an object wiht a provider id and a taxon id at that provider.",
+        "comment": "Accepts array for multilingual support.",
+        "oneOf":
+        [
+          {
+            "$ref": "#/definitions/externalResource"
+          },
+          {
+            "type": "array",
+            "items": {"$ref": "#/definitions/externalResource"}
+          }
+        ]
+      }
+    }
+  },
+  "character":
+  {
+    "type": "object",
+    "required": ["id", "string", "states"],
+    "properties":
+    {
+      "id":
+      {
+        "description": "Internally unique id to the character.",
+        "$ref": "#/definitions/validId"
+      },
+      "string":
+      {
+        "description": "Name of the character.",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString",
+        "examples": ["Color of the wings"]
+      },
+      "media":
+      {
+        "description": "The illustration/image of the character. Can be used to inform user of relevant structures etc.",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedMediaElement"
+      },
+      "descriptionIntro":
+      {
+        "description": "Short description of the character (valid html).",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString"
+      },
+      "descriptionDetails":
+      {
+        "description": "Extended description of the character that supplements the descriptionIntro (valid html).",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString"
+      },
+      "descriptionUrl":
+      {
+        "description": "Hyperlink or resource to more information on the character.",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedUrl"
+      },
+      "type": {
+        "description": "Type of the character (exclusive when states are catagorical and mutually exclusive, multistate when these are non-exclusive, or numerical when the state is numerical).",
+        "comment": "Default is exclusive (if not specified).",
+        "type": "string",
+        "enum": ["exclusive", "multistate", "numerical"]
+      },
+      "requiredExpertise":
+      {
+        "description": "Id to the levelOfExpertise required to answer this character.",
+        "comment": "Has to be one of the levelsOfExpertise defined on the key level.",
+        "$ref": "#/definitions/validId"
+      },
+      "logicalRequirement": {
+        "description": "Logical requirement that has to be fulfilled for this question to be asked.",
+        "comment": "Has to refer to stateIds, that have to be fully true (either answered or all alternatives ruled out). Can use !, &&, ||, (, ), <, >, =.",
+        "type": "string",
+        "pattern": "/^(( && )|( \\|\\| )|(&&)|(\\|\\|)|[a-z0-9_()!<>=])+$/"
+      },
+      "states":
+      {
+        "oneOf":
+        [
+          {"type": "array", "items": {"$ref": "#/definitions/state"}},
+          {"$ref": "#/definitions/state"}
+        ]
+      }
+    }
+  },
+  "state":
+  {
+    "description": "The value a character can have.",
+    "type": "object",
+    "oneOf":
+    [
+      {"required": ["id", "string"]},
+      {"required": ["id", "min", "max", "stepSize", "unit"]}
+    ],
+    "properties":
+    {
+      "id":
+      {
+        "description": "Internally unique id of the state.",
+        "$ref": "#/definitions/validId"
+      },
+      "string":
+      {
+        "description": "Content of the state.",
+        "comment": "Only to be used for catergorical characters. Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString"
+      },
+      "media":
+      {
+        "description": "Image that illustrates the state.",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedMediaElement"
+      },
+      "descriptionIntro":
+      {
+        "description": "Short description of the state (valid html).",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString"
+      },
+      "descriptionDetails":
+      {
+        "description": "Extended description of the state that supplements the descriptionIntro (valid html).",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString"
+      },
+      "descriptionUrl":
+      {
+        "description": "Hyperlink or resource to more information on the state.",
+        "comment": "Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedUrl"
+      },
+      "min":
+      {
+        "description": "Lowest numerical value of the state (over all taxa).",
+        "comment": "Only to be used for numerical characters",
+        "type": "number"
+      },
+      "max":
+      {
+        "description": "Highest possible numerical value of the state (over all taxa).",
+        "comment": "Only to be used for numerical characters",
+        "type": "number"
+      },
+      "stepSize":
+      {
+        "description": "Step size of the state (steps between min and max, over all taxa).",
+        "comment": "Only to be used for numerical characters",
+        "type": "number"
+      },
+      "unit":
+      {
+        "description": "Unit in which the state is measured or counted.",
+        "comment": "Only to be used for numerical characters. Accepts array for multilingual support.",
+        "$ref": "#/definitions/localizedString",
+        "examples": ["mm", "meters below the surface", "spots", "legs", "segments"]
+      }
+    }
+  },
+    "statement":
+    {
+      "description": "A fact connecting a taxon and a character through a certain value.",
+      "type": "object",
+      "required": ["id", "taxonId", "characterId", "value"],
+      "properties":
+      {
+        "id":
+        {
+          "description": "Internally unique id of the statement.",
+          "$ref": "#/definitions/validId"
+        },
+        "taxonId":
+        {
+          "description": "Id of the taxon this statement is about.",
+          "$ref": "#/definitions/validId"
+        },
+        "characterId":
+        {
+          "description": "Id of the character this statement is about.",
+          "$ref": "#/definitions/validId"
+        },
+        "value":
+        {
+          "description": "A value for this character for this taxon. Must be either the id of a state, or an array of floats [min, max] for a numerical range.",
+          "oneOf": [
+            {"$ref": "#/definitions/localizedString"},
+            {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2}
+          ]
+        },
+        "frequency":
+        {
+          "description": "The frequency with which the taxon has this value for this character.",
+          "comment": "Default is 1 (if not specified).",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "media":
+        {
+          "description": "An illustration of this particular taxon having this particular property (this value for this character).",
+          "comment": "Accepts array for multilingual support.",
+          "$ref": "#/definitions/localizedMediaElement"
+        },
+        "descriptionIntro":
+        {
+          "description": "Short description of the taxon having this property (valid html).",
+          "comment": "Accepts array for multilingual support.",
+          "$ref": "#/definitions/localizedString"
+        },
+        "descriptionDetails":
+        {
+          "description": "Extended description of the taxon having this property that supplements the descriptionIntro (valid html).",
+          "comment": "Accepts array for multilingual support.",
+          "$ref": "#/definitions/localizedString"
+        },
+        "descriptionUrl":
+        {
+          "description": "Hyperlink or resource to more information on the taxon having this property.",
+          "comment": "Accepts array for multilingual support.",
+          "$ref": "#/definitions/localizedUrl"
+        }
+      }
+    }
+  }
+}
