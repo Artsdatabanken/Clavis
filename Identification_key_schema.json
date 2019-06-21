@@ -28,7 +28,7 @@
         "Birds of Norway"
       ]
     },
-    "mediaID": {
+    "media": {
       "description": "The logo/illustration image of the key.",
       "$ref": "#/definitions/mediaID"
     },
@@ -102,7 +102,7 @@
         }
       ]
     },
-    "creators": {
+    "creator": {
       "description": "The id(s) of the creator(s) of the key",
       "oneOf": [
         {
@@ -116,7 +116,7 @@
         }
       ]
     },
-    "contributors": {
+    "contributor": {
       "description": "The id(s) of the contributor(s) of the key",
       "oneOf": [
         {
@@ -130,7 +130,7 @@
         }
       ]
     },
-    "publishers": {
+    "publisher": {
       "description": "The id(s) of the publising institutions of the key.",
       "oneOf": [
         {
@@ -151,7 +151,7 @@
         "https://creativecommons.org/licenses/by/4.0/"
       ]
     },
-    "languages": {
+    "language": {
       "description": "The ISO 639-1 code(s) of the key language(s).",
       "comment": "String for a single language, array of strings for multilingual support. If used as an array, be sure to use the localizedString and localizedUrl as arrays too.",
       "oneOf": [
@@ -439,7 +439,7 @@
           "description": "Image file that can be shown instead of the video or audio file.",
           "$ref": "#/definitions/mediaID"
         },
-        "creators": {
+        "creator": {
           "description": "The id(s) of the creator(s) of the media file",
           "oneOf": [
             {
@@ -453,7 +453,7 @@
             }
           ]
         },
-        "contributors": {
+        "contributor": {
           "description": "The id(s) of the contributor(s) of the media file",
           "oneOf": [
             {
@@ -467,7 +467,7 @@
             }
           ]
         },
-        "publishers": {
+        "publisher": {
           "description": "The id(s) of the publising institutions of the media file.",
           "oneOf": [
             {
@@ -494,7 +494,7 @@
       "description": "A media element (collection of various formats of the same media object).",
       "type": "object",
       "properties": {
-        "files": {
+        "file": {
           "description": "The various formats of the same media object.",
           "oneOf": [
             {
@@ -590,11 +590,11 @@
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedUrl"
         },
-        "mediaID": {
+        "media": {
           "description": "A media file (image) representing the person.",
           "$ref": "#/definitions/mediaID"
         },
-        "affiliations": {
+        "affiliation": {
           "description": "Organization id(s) the person is affiliated with.",
           "oneOf": [
             {
@@ -634,7 +634,7 @@
           "description": "The person-id that is the main contact point for the organization.",
           "$ref": "#/definitions/personID"
         },
-        "mediaID": {
+        "media": {
           "description": "A media file (image) representing the organization, such as a logo.",
           "$ref": "#/definitions/mediaID"
         },
@@ -828,7 +828,7 @@
             "Color of the wings"
           ]
         },
-        "mediaID": {
+        "media": {
           "description": "The media element(s) of the character. Can be used to inform user of relevant structures etc.",
           "oneOf": [
             {
@@ -999,11 +999,11 @@
           "description": "Internally unique id of the statement.",
           "$ref": "#/definitions/statementID"
         },
-        "taxonId": {
+        "taxon": {
           "description": "Id of the taxon this statement is about.",
           "$ref": "#/definitions/taxonID"
         },
-        "characterId": {
+        "character": {
           "description": "Id of the character this statement is about.",
           "$ref": "#/definitions/characterID"
         },
@@ -1049,7 +1049,7 @@
           "description": "An url or external service that returns distribution information for this property.",
           "$ref": "#/definitions/url"
         },
-        "mediaID": {
+        "media": {
           "description": "Illustration(s) of this particular taxon having this particular property (this value for this character).",
           "oneOf": [
             {
