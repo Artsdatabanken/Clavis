@@ -590,6 +590,10 @@
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedUrl"
         },
+        "mediaID": {
+          "description": "A media file (image) representing the person.",
+          "$ref": "#/definitions/mediaID"
+        },
         "affiliations": {
           "description": "Organization id(s) the person is affiliated with.",
           "oneOf": [
@@ -629,7 +633,11 @@
         "primaryContact": {
           "description": "The person-id that is the main contact point for the organization.",
           "$ref": "#/definitions/personID"
-        }
+        },
+        "mediaID": {
+          "description": "A media file (image) representing the organization, such as a logo.",
+          "$ref": "#/definitions/mediaID"
+        },
       }
     },
     "userRequirement": {
