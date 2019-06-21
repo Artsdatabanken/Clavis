@@ -194,10 +194,7 @@
     },
     "identifier": {
       "description": "The GUID of this key (persistent regardless of version).",
-      "type": "string",
-      "examples": [
-        ""
-      ]
+      "type": "string"
     },
     "url": {
       "description": "The url of where the key lives (to check for newer versions).",
@@ -253,7 +250,7 @@
         "$ref": "#/definitions/organization"
       }
     },
-    "media": {
+    "mediaElements": {
       "description": "Media elements that are used in the key.",
       "type": "array",
       "items": {
@@ -637,7 +634,7 @@
         "media": {
           "description": "A media file (image) representing the organization, such as a logo.",
           "$ref": "#/definitions/mediaID"
-        },
+        }
       }
     },
     "userRequirement": {
@@ -802,7 +799,7 @@
           "description": "The area(s) in which the taxon occurs, represented as the coordinates array of a GeoJSON MultiPolygon.",
           "$ref": "#/definitions/multiPolygon"
         },
-        "geoDistributionService" : {
+        "geoDistributionService": {
           "description": "An url or external service that returns distribution information for this taxon.",
           "$ref": "#/definitions/url"
         }
@@ -1045,7 +1042,7 @@
           "description": "The area(s) in which the taxon can have this property, represented as the coordinates array of a GeoJSON MultiPolygon.",
           "$ref": "#/definitions/multiPolygon"
         },
-        "geoDistributionService" : {
+        "geoDistributionService": {
           "description": "An url or external service that returns distribution information for this property.",
           "$ref": "#/definitions/url"
         },
