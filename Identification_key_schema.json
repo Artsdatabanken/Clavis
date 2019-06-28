@@ -371,23 +371,6 @@
     "mediaFile": {
       "type": "object",
       "properties": {
-        "mediaType": {
-          "description": "The format of the media file.",
-          "type": "string",
-          "enum": [
-            "image/png",
-            "image/jpeg",
-            "image/gif",
-            "image/svg+xml",
-            "audio/wav",
-            "audio/aac",
-            "audio/mpeg",
-            "audio/ogg",
-            "video/mpeg",
-            "video/ogg",
-            "video/x-msvideo"
-          ]
-        },
         "title": {
           "description": "The title of the media file.",
           "$ref": "#/definitions/localizedString"
@@ -397,27 +380,17 @@
           "$ref": "#/definitions/url"
         },
         "file": {
-          "description": "The actual media file (base64 or svg).",
+          "description": "The actual media file (base64 or svg) as a data URI scheme.",
           "oneOf": [
             {
               "type": "string",
-              "contentEncoding": "base64",
-              "contentMediaType": "image/png"
+              "pattern": "^data:([a-z0-9/]+);base64,([a-zA-Z0-9+/=]+)$"
             },
             {
               "type": "string",
-              "contentEncoding": "base64",
-              "contentMediaType": "image/jpeg"
-            },
-            {
-              "type": "string",
-              "contentEncoding": "base64",
-              "contentMediaType": "image/gif"
-            },
-            {
-              "type": "string",
-              "contentMediaType": "image/svg+xml"
+              "pattern": "^data:image/svg\\+xml;utf8,(.*)$"
             }
+
           ]
         },
         "width": {
