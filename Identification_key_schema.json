@@ -326,47 +326,47 @@
     "taxonID": {
       "description": "String used as an internal ID for a taxon. Lowercase alphanumerical and underscores are allowed.",
       "type": "string",
-      "pattern": "^taxon_[a-z0-9_]+$"
+      "pattern": "^taxon:[a-z0-9_]+$"
     },
     "characterID": {
       "description": "String used as an internal ID for a character. Lowercase alphanumerical and underscores are allowed.",
       "type": "string",
-      "pattern": "^character_[a-z0-9_]+$"
+      "pattern": "^character:[a-z0-9_]+$"
     },
     "stateID": {
       "description": "String used as an internal ID for a state. Lowercase alphanumerical and underscores are allowed.",
       "type": "string",
-      "pattern": "^state_[a-z0-9_]+$"
+      "pattern": "^state:[a-z0-9_]+$"
     },
     "personID": {
       "description": "String used as an internal ID for a person. Lowercase alphanumerical and underscores are allowed.",
       "type": "string",
-      "pattern": "^person_[a-z0-9_]+$"
+      "pattern": "^person:[a-z0-9_]+$"
     },
     "organizationID": {
       "description": "String used as an internal ID for an organization. Lowercase alphanumerical and underscores are allowed.",
       "type": "string",
-      "pattern": "^organization_[a-z0-9_]+$"
+      "pattern": "^organization:[a-z0-9_]+$"
     },
     "serviceID": {
       "description": "String used as an internal ID for a service. Lowercase alphanumerical and underscores are allowed.",
       "type": "string",
-      "pattern": "^service_[a-z0-9_]+$"
+      "pattern": "^service:[a-z0-9_]+$"
     },
     "statementID": {
       "description": "String used as an internal ID for a statement. Lowercase alphanumerical and underscores are allowed.",
       "type": "string",
-      "pattern": "^statement_[a-z0-9_]+$"
+      "pattern": "^statement:[a-z0-9_]+$"
     },
     "userRequirementID": {
       "description": "String used as an internal ID for a user requirement. Lowercase alphanumerical and underscores are allowed.",
       "type": "string",
-      "pattern": "^requirement_[a-z0-9_]+$"
+      "pattern": "^requirement:[a-z0-9_]+$"
     },
     "mediaID": {
       "description": "String used as an internal ID for a media element. Lowercase alphanumerical and underscores are allowed.",
       "type": "string",
-      "pattern": "^media_[a-z0-9_]+$"
+      "pattern": "^media:[a-z0-9_]+$"
     },
     "mediaFile": {
       "type": "object",
