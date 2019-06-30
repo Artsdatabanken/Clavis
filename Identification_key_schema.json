@@ -984,9 +984,6 @@
               "$ref": "#/definitions/stateID"
             },
             {
-              "$ref": "#/definitions/localizedString"
-            },
-            {
               "type": "array",
               "items": {
                 "type": "number"
