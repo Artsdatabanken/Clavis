@@ -782,7 +782,7 @@
       "type": "object",
       "required": [
         "id",
-        "string",
+        "title",
         "states"
       ],
       "properties": {
@@ -872,7 +872,7 @@
         {
           "required": [
             "id",
-            "string"
+            "title"
           ]
         },
         {
