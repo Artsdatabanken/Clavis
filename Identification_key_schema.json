@@ -390,7 +390,6 @@
               "type": "string",
               "pattern": "^data:image/svg\\+xml;utf8,(.*)$"
             }
-
           ]
         },
         "width": {
@@ -733,9 +732,12 @@
           ]
         },
         "isSubTaxonomic": {
-          "description": "Whether or not this is a sub-class of a true taxon (such as a morph, life stage, sex, etc), or an actual taxon.",
+          "description": "Whether or not this is a sub-class of a true taxon (such as a morph, life stage, sex, etc), or an actual taxon. In such cases, only the sub-class would be specified as the name, not repeating the parent taxon name.",
           "comment": "Default is FALSE (if not specified).",
-          "type": "boolean"
+          "type": "boolean",
+          "examples": [
+            "larva"
+          ]
         },
         "isEndPoint": {
           "description": "Given that isSubTaxonomic is true for this taxon, should the key continue until this is the only remaining possibility, or stop at its parent?",
