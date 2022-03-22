@@ -848,7 +848,7 @@
           "description": "Logical requirement that has to be fulfilled for this question to be asked.",
           "comment": "Has to refer to stateIds, that have to be fully true (either answered or all alternatives ruled out). Can use !, &&, ||, (, ), <, >, =.",
           "type": "string",
-          "pattern": "^(( && )|( \\|\\| )|(&&)|(\\|\\|)|[a-z0-9_()!<>=])+$"
+          "pattern": "^(( && )|( \\|\\| )|(&&)|(\\|\\|)|[a-z0-9_:()!<>=])+$"
         },
         "states": {
           "oneOf": [
