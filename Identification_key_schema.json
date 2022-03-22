@@ -719,6 +719,23 @@
             }
           ]
         },
+        "description": {
+          "description": "Short description of the taxon (valid html).",
+          "comment": "Accepts array for multilingual support.",
+          "$ref": "#/definitions/localizedString",
+          "contentMediaType": "text/html"
+        },
+        "descriptionDetails": {
+          "description": "Extended description of the taxon that supplements the description (valid html).",
+          "comment": "Accepts array for multilingual support.",
+          "$ref": "#/definitions/localizedString",
+          "contentMediaType": "text/html"
+        },
+        "descriptionUrl": {
+          "description": "Hyperlink or resource to more information on the taxon.",
+          "comment": "Accepts array for multilingual support.",
+          "$ref": "#/definitions/localizedUrl"
+        },
         "rank": {
           "description": "Name of the level of the taxon.",
           "comment": "Accepts array for multilingual support.",
