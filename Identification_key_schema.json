@@ -858,12 +858,12 @@
           "$ref": "#/definitions/localizedUrl"
         },
         "type": {
-          "description": "Type of the character (exclusive when states are catagorical and mutually exclusive, multistate when these are non-exclusive, or numerical when the state is numerical).",
+          "description": "Type of the character (exclusive when states are catagorical and mutually exclusive, non-exclusive when these are non-exclusive, or numerical when the state is numerical).",
           "comment": "Default is exclusive (if not specified).",
           "type": "string",
           "enum": [
             "exclusive",
-            "multistate",
+            "non-exclusive",
             "numerical"
           ]
         },
