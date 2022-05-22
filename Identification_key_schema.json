@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Identification key",
-  "description": "An identification key, containing knowledge that may be used to distinguish taxa from each other.",
+  "title": "Clavis identification key schema",
+  "description": "Clavis-compliant keys contain knowledge that may be used to distinguish taxa from each other.",
   "type": "object",
   "required": [
     "$schema",
@@ -271,7 +271,9 @@
             "pattern": "^[a-z]{2}$"
           },
           "properties": {},
-          "additionalProperties": { "type": "string" }
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       ]
     },
@@ -287,7 +289,9 @@
             "pattern": "^[a-z]{2}$"
           },
           "properties": {},
-          "additionalProperties": { "$ref": "#/definitions/url" }
+          "additionalProperties": {
+            "$ref": "#/definitions/url"
+          }
         }
       ]
     },
@@ -311,7 +315,9 @@
                 "pattern": "^[a-z]{2}$"
               },
               "properties": {},
-              "additionalProperties": { "$ref": "#/definitions/mediaElement" }
+              "additionalProperties": {
+                "$ref": "#/definitions/mediaElement"
+              }
             }
           ]
         }
@@ -513,8 +519,7 @@
           "description": "The id of the resource at the externalService.",
           "type": "string"
         }
-      },
-      "additionalProperties": false
+      }
     },
     "externalService": {
       "description": "Service used by the key, for media files, taxonomy and/or nomenclature, species distributions, etc.",
@@ -767,7 +772,7 @@
           "type": "string",
           "minLength": 0,
           "examples": [
-            "male", 
+            "male",
             "♀",
             "larva"
           ]
@@ -796,7 +801,9 @@
                 "pattern": "^[a-z]{2}$"
               },
               "properties": {},
-              "additionalProperties": { "$ref": "#/definitions/externalResource" }
+              "additionalProperties": {
+                "$ref": "#/definitions/externalResource"
+              }
             }
           ]
         },
