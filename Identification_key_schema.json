@@ -33,16 +33,16 @@
       "$ref": "#/definitions/mediaID"
     },
     "description": {
-      "description": "Short description of the key (valid html).",
+      "description": "Short description of the key (valid markdown).",
       "comment": "Accepts array for multilingual support.",
       "$ref": "#/definitions/localizedString",
-      "contentMediaType": "text/html"
+      "contentMediaType": "text/markdown"
     },
     "descriptionDetails": {
-      "description": "Extended description of the key that supplements the description (valid html).",
+      "description": "Extended description of the key that supplements the description (valid markdown).",
       "comment": "Accepts array for multilingual support.",
       "$ref": "#/definitions/localizedString",
-      "contentMediaType": "text/html"
+      "contentMediaType": "text/markdown"
     },
     "descriptionUrl": {
       "description": "Hyperlink to more information on the key (valid url).",
@@ -87,7 +87,7 @@
         ]
       ]
     },
-    "regionMultiPolygon": {
+    "geography": {
       "description": "The region for which the key is valid (e.g. covers all subtaxa), represented as the coordinates array of a GeoJSON MultiPolygon.",
       "$ref": "#/definitions/multiPolygon"
     },
@@ -390,7 +390,6 @@
               "type": "string",
               "pattern": "^data:image/svg\\+xml;utf8,(.*)$"
             }
-
           ]
         },
         "width": {
@@ -628,16 +627,16 @@
           "$ref": "#/definitions/localizedString"
         },
         "description": {
-          "description": "Short description of the requirements to the user (valid html).",
+          "description": "Short description of the requirements to the user (valid markdown).",
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedString",
-          "contentMediaType": "text/html"
+          "contentMediaType": "text/markdown"
         },
         "descriptionDetails": {
-          "description": "Extended description of the requirements to the user that supplements the description (valid html).",
+          "description": "Extended description of the requirements to the user that supplements the description (valid markdown).",
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedString",
-          "contentMediaType": "text/html"
+          "contentMediaType": "text/markdown"
         },
         "descriptionUrl": {
           "description": "Hyperlink to more information on the requirements to the user (valid url).",
@@ -665,6 +664,12 @@
             "id",
             "externalReference"
           ]
+        },
+        {
+          "required": [
+            "id",
+            "label"
+          ]
         }
       ],
       "properties": {
@@ -674,6 +679,7 @@
         },
         "scientificName": {
           "description": "Scientific name of the taxon.",
+          "minLength": 5,
           "type": "string",
           "examples": [
             "Vulpes lagopus"
@@ -691,7 +697,7 @@
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "examples": [
-            "B. hortorum, queen, melanistic"
+            "B. hortorum (melanistic queen)"
           ]
         },
         "vernacularName": {
@@ -720,6 +726,23 @@
             }
           ]
         },
+        "description": {
+          "description": "Short description of the taxon (valid markdown).",
+          "comment": "Accepts array for multilingual support.",
+          "$ref": "#/definitions/localizedString",
+          "contentMediaType": "text/markdown"
+        },
+        "descriptionDetails": {
+          "description": "Extended description of the taxon that supplements the description (valid markdown).",
+          "comment": "Accepts array for multilingual support.",
+          "$ref": "#/definitions/localizedString",
+          "contentMediaType": "text/markdown"
+        },
+        "descriptionUrl": {
+          "description": "Hyperlink or resource to more information on the taxon.",
+          "comment": "Accepts array for multilingual support.",
+          "$ref": "#/definitions/localizedUrl"
+        },
         "rank": {
           "description": "Name of the level of the taxon.",
           "comment": "Accepts array for multilingual support.",
@@ -732,14 +755,19 @@
             ]
           ]
         },
-        "isSubTaxonomic": {
-          "description": "Whether or not this is a sub-class of a true taxon (such as a morph, life stage, sex, etc), or an actual taxon.",
-          "comment": "Default is FALSE (if not specified).",
-          "type": "boolean"
+        "label": {
+          "description": "Type of morph of the taxon.",
+          "type": "string",
+          "minLength": 0,
+          "examples": [
+            "male", 
+            "♀",
+            "larva"
+          ]
         },
         "isEndPoint": {
-          "description": "Given that isSubTaxonomic is true for this taxon, should the key continue until this is the only remaining possibility, or stop at its parent?",
-          "comment": "Default is TRUE (if not specified).",
+          "description": "Whether the key should stop when this taxon is the only remaining possibility, even when it has multiple children remaining.",
+          "comment": "Default is FALSE (if not specified). A taxon without children is alway an endpoint by definition, unless one of its ancestors overrides this by being specified as an endpoint.",
           "type": "boolean"
         },
         "children": {
@@ -768,11 +796,11 @@
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedUrl"
         },
-        "geoDistribution": {
+        "geography": {
           "description": "The area(s) in which the taxon occurs, represented as the coordinates array of a GeoJSON MultiPolygon.",
           "$ref": "#/definitions/multiPolygon"
         },
-        "geoDistributionService": {
+        "geographyService": {
           "description": "An url or external service that returns distribution information for this taxon.",
           "$ref": "#/definitions/url"
         }
@@ -813,16 +841,16 @@
           ]
         },
         "description": {
-          "description": "Short description of the character (valid html).",
+          "description": "Short description of the character (valid markdown).",
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedString",
-          "contentMediaType": "text/html"
+          "contentMediaType": "text/markdown"
         },
         "descriptionDetails": {
-          "description": "Extended description of the character that supplements the description (valid html).",
+          "description": "Extended description of the character that supplements the description (valid markdown).",
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedString",
-          "contentMediaType": "text/html"
+          "contentMediaType": "text/markdown"
         },
         "descriptionUrl": {
           "description": "Hyperlink or resource to more information on the character.",
@@ -910,16 +938,16 @@
           ]
         },
         "description": {
-          "description": "Short description of the state (valid html).",
+          "description": "Short description of the state (valid markdown).",
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedString",
-          "contentMediaType": "text/html"
+          "contentMediaType": "text/markdown"
         },
         "descriptionDetails": {
-          "description": "Extended description of the state that supplements the description (valid html).",
+          "description": "Extended description of the state that supplements the description (valid markdown).",
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedString",
-          "contentMediaType": "text/html"
+          "contentMediaType": "text/markdown"
         },
         "descriptionUrl": {
           "description": "Hyperlink or resource to more information on the state.",
@@ -950,7 +978,7 @@
             "meters below the surface",
             "spots",
             "legs",
-            "segments"
+            "kg"
           ]
         }
       }
@@ -962,7 +990,8 @@
         "id",
         "taxonId",
         "characterId",
-        "value"
+        "value",
+        "frequency"
       ],
       "properties": {
         "id": {
@@ -995,24 +1024,15 @@
         },
         "frequency": {
           "description": "The frequency with which the taxon has this value for this character.",
-          "comment": "Default is 1 (if not specified).",
           "type": "number",
           "minimum": 0,
           "maximum": 1
         },
-        "stdev": {
-          "description": "The standard deviation (SD or σ (sigma)) of the normal distribution describing the probability distribution between the min and max of a numeric range.",
-          "type": "number"
-        },
-        "median": {
-          "description": "The median (µ (mu), also the mean and mode) of the normal distribution describing the probability distribution between the min and max of a numeric range.",
-          "type": "number"
-        },
-        "geoDistribution": {
+        "geography": {
           "description": "The area(s) in which the taxon can have this property, represented as the coordinates array of a GeoJSON MultiPolygon.",
           "$ref": "#/definitions/multiPolygon"
         },
-        "geoDistributionService": {
+        "geographyService": {
           "description": "An url or external service that returns distribution information for this property.",
           "$ref": "#/definitions/url"
         },
@@ -1031,16 +1051,16 @@
           ]
         },
         "description": {
-          "description": "Short description of the taxon having this property (valid html).",
+          "description": "Short description of the taxon having this property (valid markdown).",
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedString",
-          "contentMediaType": "text/html"
+          "contentMediaType": "text/markdown"
         },
         "descriptionDetails": {
-          "description": "Extended description of the taxon having this property that supplements the description (valid html).",
+          "description": "Extended description of the taxon having this property that supplements the description (valid markdown).",
           "comment": "Accepts array for multilingual support.",
           "$ref": "#/definitions/localizedString",
-          "contentMediaType": "text/html"
+          "contentMediaType": "text/markdown"
         },
         "descriptionUrl": {
           "description": "Hyperlink or resource to more information on the taxon having this property.",
