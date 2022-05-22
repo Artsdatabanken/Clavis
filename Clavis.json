@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Identification key",
-  "description": "An identification key, containing knowledge that may be used to distinguish taxa from each other.",
+  "title": "Clavis identification key schema",
+  "description": "Clavis-compliant keys contain knowledge that may be used to distinguish taxa from each other.",
   "type": "object",
   "required": [
     "$schema",
@@ -260,28 +260,36 @@
   },
   "definitions": {
     "localizedString": {
-      "description": "Language-dependent string or array of strings, corresponding to the languages supported by the key.",
+      "description": "Language-dependent string or object of strings, with keys corresponding to the languages supported by the key.",
       "oneOf": [
         {
           "type": "string"
         },
         {
-          "type": "array",
-          "items": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[a-z]{2}$"
+          },
+          "properties": {},
+          "additionalProperties": {
             "type": "string"
           }
         }
       ]
     },
     "localizedUrl": {
-      "description": "Language-dependent urls or array of urls, corresponding to the languages supported by the key.",
+      "description": "Language-dependent urls or object of urls, corresponding to the languages supported by the key.",
       "oneOf": [
         {
           "$ref": "#/definitions/url"
         },
         {
-          "type": "array",
-          "items": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[a-z]{2}$"
+          },
+          "properties": {},
+          "additionalProperties": {
             "$ref": "#/definitions/url"
           }
         }
@@ -289,7 +297,7 @@
     },
     "localizedMediaElement": {
       "type": "object",
-      "description": "Language-dependent media element or array of media elements, corresponding to the languages supported by the key.",
+      "description": "Language-dependent media element or object of media elements, corresponding to the languages supported by the key.",
       "properties": {
         "id": {
           "description": "Internally unique id of the localized media element.",
@@ -302,8 +310,12 @@
               "$ref": "#/definitions/mediaElement"
             },
             {
-              "type": "array",
-              "items": {
+              "type": "object",
+              "propertyNames": {
+                "pattern": "^[a-z]{2}$"
+              },
+              "properties": {},
+              "additionalProperties": {
                 "$ref": "#/definitions/mediaElement"
               }
             }
@@ -546,7 +558,7 @@
         },
         "name": {
           "description": "Full name of the person",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString"
         },
         "email": {
@@ -556,7 +568,7 @@
         },
         "url": {
           "description": "Hyperlink to more information on the person (valid url).",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedUrl"
         },
         "media": {
@@ -591,12 +603,12 @@
         },
         "name": {
           "description": "Name of the organization",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString"
         },
         "url": {
           "description": "Hyperlink to more information on the organization (valid url).",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedUrl"
         },
         "primaryContact": {
@@ -628,24 +640,24 @@
         },
         "description": {
           "description": "Short description of the requirements to the user (valid markdown).",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "contentMediaType": "text/markdown"
         },
         "descriptionDetails": {
           "description": "Extended description of the requirements to the user that supplements the description (valid markdown).",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "contentMediaType": "text/markdown"
         },
         "descriptionUrl": {
           "description": "Hyperlink to more information on the requirements to the user (valid url).",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedUrl"
         },
         "media": {
           "description": "Media or illustration that informs the user on the requirements to the user.",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/mediaID"
         }
       }
@@ -694,7 +706,7 @@
         },
         "placeholderName": {
           "description": "Name that can be shown while fetching the name externally. Also useful for editing the key.",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "examples": [
             "B. hortorum (melanistic queen)"
@@ -702,14 +714,14 @@
         },
         "vernacularName": {
           "description": "Vernacular name of the taxon.",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "examples": [
             "fjellrev",
-            [
-              "fjellrev",
-              "Arctic Fox"
-            ]
+            {
+              "no": "fjellrev",
+              "en": "Arctic Fox"
+            }
           ]
         },
         "media": {
@@ -728,31 +740,31 @@
         },
         "description": {
           "description": "Short description of the taxon (valid markdown).",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "contentMediaType": "text/markdown"
         },
         "descriptionDetails": {
           "description": "Extended description of the taxon that supplements the description (valid markdown).",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "contentMediaType": "text/markdown"
         },
         "descriptionUrl": {
           "description": "Hyperlink or resource to more information on the taxon.",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedUrl"
         },
         "rank": {
           "description": "Name of the level of the taxon.",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "examples": [
             "slekt",
-            [
-              "slekt",
-              "genus"
-            ]
+            {
+              "no": "slekt",
+              "en": "genus"
+            }
           ]
         },
         "label": {
@@ -760,7 +772,7 @@
           "type": "string",
           "minLength": 0,
           "examples": [
-            "male", 
+            "male",
             "♀",
             "larva"
           ]
@@ -778,14 +790,18 @@
         },
         "externalReference": {
           "description": "Reference to a taxon at a provider, as an object wiht a provider id and a taxon id at that provider.",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "oneOf": [
             {
               "$ref": "#/definitions/externalResource"
             },
             {
-              "type": "array",
-              "items": {
+              "type": "object",
+              "propertyNames": {
+                "pattern": "^[a-z]{2}$"
+              },
+              "properties": {},
+              "additionalProperties": {
                 "$ref": "#/definitions/externalResource"
               }
             }
@@ -842,19 +858,19 @@
         },
         "description": {
           "description": "Short description of the character (valid markdown).",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "contentMediaType": "text/markdown"
         },
         "descriptionDetails": {
           "description": "Extended description of the character that supplements the description (valid markdown).",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "contentMediaType": "text/markdown"
         },
         "descriptionUrl": {
           "description": "Hyperlink or resource to more information on the character.",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedUrl"
         },
         "type": {
@@ -920,7 +936,7 @@
         },
         "title": {
           "description": "Content of the state.",
-          "comment": "Only to be used for catergorical characters. Accepts array for multilingual support.",
+          "comment": "Only to be used for catergorical characters. Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString"
         },
         "media": {
@@ -939,19 +955,19 @@
         },
         "description": {
           "description": "Short description of the state (valid markdown).",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "contentMediaType": "text/markdown"
         },
         "descriptionDetails": {
           "description": "Extended description of the state that supplements the description (valid markdown).",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "contentMediaType": "text/markdown"
         },
         "descriptionUrl": {
           "description": "Hyperlink or resource to more information on the state.",
-          "comment": "Accepts array for multilingual support.",
+          "comment": "Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedUrl"
         },
         "min": {
@@ -971,7 +987,7 @@
         },
         "unit": {
           "description": "Unit in which the state is measured or counted.",
-          "comment": "Only to be used for numerical characters. Accepts array for multilingual support.",
+          "comment": "Only to be used for numerical characters. Accepts object for multilingual support.",
           "$ref": "#/definitions/localizedString",
           "examples": [
             "mm",
