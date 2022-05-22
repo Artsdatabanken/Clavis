@@ -276,7 +276,7 @@
       ]
     },
     "localizedUrl": {
-      "description": "Language-dependent urls or array of urls, corresponding to the languages supported by the key.",
+      "description": "Language-dependent urls or object of urls, corresponding to the languages supported by the key.",
       "oneOf": [
         {
           "$ref": "#/definitions/url"
@@ -293,7 +293,7 @@
     },
     "localizedMediaElement": {
       "type": "object",
-      "description": "Language-dependent media element or array of media elements, corresponding to the languages supported by the key.",
+      "description": "Language-dependent media element or object of media elements, corresponding to the languages supported by the key.",
       "properties": {
         "id": {
           "description": "Internally unique id of the localized media element.",
@@ -513,7 +513,8 @@
           "description": "The id of the resource at the externalService.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "externalService": {
       "description": "Service used by the key, for media files, taxonomy and/or nomenclature, species distributions, etc.",
