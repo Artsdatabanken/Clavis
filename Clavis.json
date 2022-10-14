@@ -693,22 +693,22 @@
     },
     "taxon": {
       "type": "object",
-      "oneOf": [
+      "required": [
+        "id"
+      ],
+      "anyOf": [
         {
           "required": [
-            "id",
             "scientificName"
           ]
         },
         {
           "required": [
-            "id",
             "externalReference"
           ]
         },
         {
           "required": [
-            "id",
             "label"
           ]
         }
