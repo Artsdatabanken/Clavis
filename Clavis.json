@@ -974,8 +974,19 @@
       "description": "The value a character can have.",
       "type": "object",
       "required": [
-        "id",
-        "title"
+        "id"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "title"
+          ]
+        },
+        {
+          "required": [
+            "media"
+          ]
+        }
       ],
       "properties": {
         "id": {
