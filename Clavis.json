@@ -846,18 +846,18 @@
     },
     "character": {
       "type": "object",
+      "required": [
+        "id",
+        "title"
+      ],
       "oneOf": [
         {
           "required": [
-            "id",
-            "title",
             "states"
           ]
         },
         {
           "required": [
-            "id",
-            "title",
             "type",
             "min",
             "max",
